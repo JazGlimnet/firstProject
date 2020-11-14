@@ -4,6 +4,7 @@ var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 var recognition = new SpeechRecognition();
+recognition.continuous = true;
 
 var inputPara = document.querySelector('#_input');
 var resultPara = document.querySelector('#result');
@@ -45,7 +46,7 @@ function getMySound() {
 
 recognition.onresult = function(event) {
 
-  var speechResult = event.results[0][0].transcript.toLowerCase();
+  var speechResult = event.results[event.results.length - 1][0].transcript.toLowerCase();
   const outPutResult = diagnosticPara.textContent = speechResult;
   document.querySelector('._speechContainer').style.display = 'none';
   // speakUp(outPutResult);
@@ -63,26 +64,27 @@ recognition.onresult = function(event) {
     document.getElementById('apply').scrollIntoView({
     behavior: 'smooth'
     });
+    //recognition.stop();
     speakUp('do you wanna apply for corse?')
-    getMySound();
-    if(outPutResult.includes('yes')){
-      speakUp('what is your first name');
-    }
-    applyForCorse();
-
-    // if(outPutResult === 'yes'){
-    //   speakUp('what is your name?');
-    // }
+      applyForCorse();
+    //getMySound();
+    //if(outPutResult.includes('yes')){
+      //speakUp('what is your first name');
+      //applyForCorse();
+    //}
+    if(outPutResult === 'yes'){
+       speakUp('what is your name?');
+     }
   } else {
-    speakUp('sorry, i dont understand you. you can navigat between home, programs and apply');
+    speakUp('sorry, i dont understand you.');
   }
 }
 
   function applyForCorse(){
-    var speechResult = event.results[0][0].transcript.toLowerCase();
+    var speechResult = event.results[event.results.length - 1][0].transcript.toLowerCase();
     const outPutResult = diagnosticPara.textContent = speechResult;
     // getMySound();
-    if(outPutResult === 'yes'){
+    if(outPutResult.includes('yes')){
       speakUp('what is your name?');
     }
   }
