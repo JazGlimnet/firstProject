@@ -64,14 +64,7 @@ recognition.onresult = function(event) {
     document.getElementById('apply').scrollIntoView({
     behavior: 'smooth'
     });
-    //recognition.stop();
     speakUp('do you wanna apply for corse?')
-      applyForCorse();
-    //getMySound();
-    //if(outPutResult.includes('yes')){
-      //speakUp('what is your first name');
-      //applyForCorse();
-    //}
     if(outPutResult === 'yes'){
        speakUp('what is your name?');
      }
